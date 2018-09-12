@@ -1,0 +1,44 @@
+{
+  "name": "gitbook-plugin-lightbox",
+  "version": "1.0.0",
+  "description": " A gitbook plugin to show image by lightbox.",
+  "main": "src/index.js",
+  "repository": "https://github.com/vongola12324/gitbook-plugin-lightbox.git",
+  "author": "Vongola <vongola12324@coder.tw>",
+  "license": "MIT",
+  "keywords": [
+    "gitbook",
+    "plugin",
+    "lightbox",
+    "image"
+  ],
+  "engines": {
+    "gitbook": ">3.0.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "lightbox2": "~2.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.1",
+    "@babel/preset-env": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^23.6.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint **/*.js",
+    "build": "babel src --out-dir lib --presets=es2015",
+    "docs": "gitbook install book && gitbook build book docs"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  }
+}
