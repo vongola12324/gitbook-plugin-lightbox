@@ -1,4 +1,3 @@
-import $ from "jquery";
 let randomstring = require("randomstring");
 
 const generateLightBoxHTML = (url, title) => {
@@ -26,12 +25,12 @@ module.exports = {
     book: getAssets(),
     hooks: {
         page: function (page) {
-            let content = $(page.content);
-            content.find('img').each(function (index, img) {
+            let $ = cheerio.load(page.content);
+            $('img').each(function (index, img) {
                 let target = $(img);
                 target.replaceWith(generateLightBoxHTML(target.attr('src'), target.attr('alt')));
             });
-            page.content = content.html();
+            page.content = $.html();
             return page;
         }
     }
