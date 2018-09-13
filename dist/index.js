@@ -1,13 +1,11 @@
 "use strict";
 
-var _jquery = _interopRequireDefault(require("jquery"));
+var cheerio = require('cheerio');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var uuid = require('uuid/v4');
 
-var randomstring = require("randomstring");
-
-var generateLightBoxHTML = function generateLightBoxHTML(url, title) {
-  return '<a href="' + url + '" data-lightbox="' + randomstring() + '" data-title="' + title + '"></a>';
+var generateLightBoxHTML = function generateLightBoxHTML(img) {
+  return '<a href="' + img.attr('src') + '" data-lightbox="' + uuid() + '" data-title="' + img.attr('alt') + '">' + img + '</a>';
 };
 
 var getAssets = function getAssets() {
@@ -26,12 +24,12 @@ module.exports = {
   book: getAssets(),
   hooks: {
     page: function page(_page) {
-      var content = (0, _jquery.default)(_page.content);
-      content.find('img').each(function (index, img) {
-        var target = (0, _jquery.default)(img);
-        target.replaceWith(generateLightBoxHTML(target.attr('src'), target.attr('alt')));
+      var $ = cheerio.load(_page.content);
+      $('img').each(function (index, img) {
+        var target = $(img);
+        target.replaceWith(generateLightBoxHTML(target));
       });
-      _page.content = content.html();
+      _page.content = $.html();
       return _page;
     }
   }

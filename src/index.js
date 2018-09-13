@@ -1,7 +1,8 @@
-let randomstring = require("randomstring");
+let cheerio = require('cheerio');
+const uuid = require('uuid/v4');
 
-const generateLightBoxHTML = (url, title) => {
-    return '<a href="' + url + '" data-lightbox="' + randomstring() +'" data-title="' + title + '"></a>';
+const generateLightBoxHTML = (img) => {
+    return '<a href="' + img.attr('src') + '" data-lightbox="' + uuid() +'" data-title="' + img.attr('alt') + '">' + img + '</a>';
 };
 
 const getAssets = function () {
@@ -28,7 +29,7 @@ module.exports = {
             let $ = cheerio.load(page.content);
             $('img').each(function (index, img) {
                 let target = $(img);
-                target.replaceWith(generateLightBoxHTML(target.attr('src'), target.attr('alt')));
+                target.replaceWith(generateLightBoxHTML(target));
             });
             page.content = $.html();
             return page;
