@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-lightbox",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": " A gitbook plugin to show image by lightbox.",
   "main": "dist/index.js",
   "repository": "https://github.com/vongola12324/gitbook-plugin-lightbox.git",
