@@ -6,20 +6,20 @@ const generateLightBoxHTML = (url, title) => {
 };
 
 const getAssets = function () {
-    let assets = {
-        assets: './assets',
+    // let config = this.config.get('pluginsConfig.lightbox');
+    // if (config.hasOwnProperty('jquery') && config['jquery'] === false) {
+    //     assets['js'] = ['jquery.min.js'].concat(assets['js'])
+    // }
+    return {
+        assets: './dist/assets',
         js: [
+            'jquery.min.js',
             'lightbox.min.js'
         ],
         css: [
             'lightbox.min.css',
         ]
     };
-    let config = book.config.get('pluginsConfig.lightbox');
-    if (config.hasOwnProperty('jquery') && config['jquery'] === false) {
-        assets['js'] = ['jquery.min.js'].concat(assets['js'])
-    }
-    return assets;
 };
 
 module.exports = {

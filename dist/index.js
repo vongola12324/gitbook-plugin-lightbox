@@ -11,18 +11,15 @@ var generateLightBoxHTML = function generateLightBoxHTML(url, title) {
 };
 
 var getAssets = function getAssets() {
-  var assets = {
-    assets: './assets',
-    js: ['lightbox.min.js'],
+  // let config = this.config.get('pluginsConfig.lightbox');
+  // if (config.hasOwnProperty('jquery') && config['jquery'] === false) {
+  //     assets['js'] = ['jquery.min.js'].concat(assets['js'])
+  // }
+  return {
+    assets: './dist/assets',
+    js: ['jquery.min.js', 'lightbox.min.js'],
     css: ['lightbox.min.css']
   };
-  var config = book.config.get('pluginsConfig.lightbox');
-
-  if (config.hasOwnProperty('jquery') && config['jquery'] === false) {
-    assets['js'] = ['jquery.min.js'].concat(assets['js']);
-  }
-
-  return assets;
 };
 
 module.exports = {

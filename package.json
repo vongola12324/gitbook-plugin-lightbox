@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-lightbox",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": " A gitbook plugin to show image by lightbox.",
   "main": "dist/index.js",
   "repository": "https://github.com/vongola12324/gitbook-plugin-lightbox.git",
@@ -13,7 +13,7 @@
     "image"
   ],
   "engines": {
-    "gitbook": ">=3.0.0"
+    "gitbook": ">2.x.x"
   },
   "dependencies": {
     "jquery": "^3.3.1",
@@ -43,6 +43,9 @@
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
   },
+  "files": [
+    "dist"
+  ],
   "gitbook": {
     "properties": {
       "jquery": {
