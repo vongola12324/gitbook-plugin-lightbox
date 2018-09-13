@@ -15,7 +15,7 @@ const getAssets = function () {
             'lightbox.min.css',
         ]
     };
-    let config = this.config.get('pluginsConfig.lightbox');
+    let config = book.config.get('pluginsConfig.lightbox');
     if (config.hasOwnProperty('jquery') && config['jquery'] === false) {
         assets['js'] = ['jquery.min.js'].concat(assets['js'])
     }

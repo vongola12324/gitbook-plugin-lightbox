@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-lightbox",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": " A gitbook plugin to show image by lightbox.",
   "main": "dist/index.js",
   "repository": "https://github.com/vongola12324/gitbook-plugin-lightbox.git",
@@ -24,13 +24,13 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "copyfiles": "~2.1.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "copyfiles": "~2.1.0"
+    "eslint-plugin-standard": "^4.0.0"
   },
   "scripts": {
     "lint": "eslint src/*.js",
