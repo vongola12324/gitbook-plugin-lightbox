@@ -204,5 +204,5 @@ Temporary Items
 .nfs*
 
 ### Project
-dist
-docs
+# not use npm install
+package.lock

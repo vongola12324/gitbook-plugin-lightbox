@@ -2,7 +2,7 @@
   "name": "gitbook-plugin-lightbox",
   "version": "1.0.0",
   "description": " A gitbook plugin to show image by lightbox.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/vongola12324/gitbook-plugin-lightbox.git",
   "author": "Vongola <vongola12324@coder.tw>",
   "license": "MIT",
@@ -13,32 +13,43 @@
     "image"
   ],
   "engines": {
-    "gitbook": ">3.0.0"
+    "gitbook": ">=3.0.0"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "lightbox2": "~2.10.0"
+    "jquery": "^3.3.1",
+    "lightbox2": "~2.10.0",
+    "randomstring": "~1.1.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "babel-cli": "^6.26.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^21.22.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "jest": "^23.6.0"
+    "copyfiles": "~2.1.0"
   },
   "scripts": {
-    "test": "jest",
-    "lint": "eslint **/*.js",
-    "build": "babel src --out-dir lib --presets=es2015",
+    "lint": "eslint src/*.js",
+    "build": "npm run babel && npm run copy:jquery && npm run copy:lightbox",
+    "babel": "babel src --out-dir dist --presets=@babel/env",
+    "copy:jquery": "copyfiles -s false -u 3 node_modules/jquery/dist/jquery.min.js dist/assets",
+    "copy:lightbox": "copyfiles -s false -u 4 node_modules/lightbox2/dist/css/lightbox.min.css node_modules/lightbox2/dist/js/lightbox.min.js dist/assets",
     "docs": "gitbook install book && gitbook build book docs"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org/"
+  },
+  "gitbook": {
+    "properties": {
+      "jquery": {
+        "type": "boolean",
+        "default": true,
+        "description": "If you don't want to use plugin built-in jquery, set it to false."
+      }
+    }
   }
 }
