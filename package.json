@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-lightbox",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": " A gitbook plugin to show image by lightbox.",
   "main": "dist/index.js",
   "repository": "https://github.com/vongola12324/gitbook-plugin-lightbox.git",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "randomstring": "~1.1.5"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
