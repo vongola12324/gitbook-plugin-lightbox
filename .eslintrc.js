@@ -1,6 +1,5 @@
 module.exports = {
-    "plugins": ["jest"],
-    "extends": ["airbnb-base", "plugin:jest/recommended"],
+    "extends": ["airbnb-base"],
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -8,7 +7,4 @@ module.exports = {
             "jsx": true
         }
     },
-    "env": {
-        "jest/globals": true
-    }
 };

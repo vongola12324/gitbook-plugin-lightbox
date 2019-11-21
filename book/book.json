@@ -1,5 +1,15 @@
 {
   "plugins": [
     "lightbox", "-highlight", "-sharing", "-lunr", "-fontsettings", "-search"
-  ]
+  ],
+  "pluginsConfig": {
+    "lightbox": {
+      "includeJQuery": false,
+      "sameUuid": true,
+      "options": {
+        "resizeDuration": 200,
+        "wrapAround": true
+      }
+    }
+  }
 }

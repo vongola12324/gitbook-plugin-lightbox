@@ -1,38 +1,74 @@
-let cheerio = require('cheerio');
+const cheerio = require('cheerio');
 const uuid = require('uuid/v4');
+let pageUuid = 0;
 
-const generateLightBoxHTML = (img) => {
-    return '<a href="' + img.attr('src') + '" data-lightbox="' + uuid() +'" data-title="' + img.attr('alt') + '">' + img + '</a>';
+let lightboxConfig = {};
+
+const generateLightBoxByElement = (img) => {
+  let imgUuid = pageUuid;
+  if (lightboxConfig.sameUuid !== true) {
+    imgUuid = uuid();
+  }
+  return generateLightBoxItem(img.attr('src'), imgUuid, img.attr('alt'))
 };
 
-const getAssets = function () {
-    // let config = this.config.get('pluginsConfig.lightbox');
-    // if (config.hasOwnProperty('jquery') && config['jquery'] === false) {
-    //     assets['js'] = ['jquery.min.js'].concat(assets['js'])
-    // }
-    return {
-        assets: './dist/assets',
-        js: [
-            'jquery.min.js',
-            'lightbox.min.js'
-        ],
-        css: [
-            'lightbox.min.css',
-        ]
-    };
+const generateLightBoxItem = (url, groupName, title) => `<a href="${url}" data-lightbox="${groupName}" data-title="${title}"><img src="${url}" alt="${title}"></a>`;
+
+const getAssets = () => {
+  const assets = {
+    assets: './dist/assets',
+    js: [
+      'js/lightbox.min.js',
+    ],
+    css: [
+      'css/lightbox.min.css',
+    ],
+  };
+  if (Object.prototype.hasOwnProperty.call(lightboxConfig, 'includeJquery') && lightboxConfig.includeJquery !== false) {
+    assets.js.push('js/jquery.slim.min.js');
+  }
+  return assets;
+};
+
+const generateLightboxConfigScript = () => {
+  if (!Object.prototype.hasOwnProperty.call(lightboxConfig, 'options')) {
+    return '';
+  }
+  return `<script>document.addEventListener("DOMContentLoaded", function() {lightbox.option(${JSON.stringify(lightboxConfig.options)});})</script>`;
+
 };
 
 module.exports = {
-    book: getAssets(),
-    hooks: {
-        page: function (page) {
-            let $ = cheerio.load(page.content);
-            $('img').each(function (index, img) {
-                let target = $(img);
-                target.replaceWith(generateLightBoxHTML(target));
-            });
-            page.content = $.html();
-            return page;
-        }
+  book: getAssets(),
+  blocks: {
+    lightbox: {
+      process: function(block) {
+        const arg = {
+          url: block.kwargs.url,
+          groupName: block.kwargs.groupName || lightboxConfig.sameUuid !== true ? uuid() : pageUuid,
+          title: block.kwargs.title || "Image",
+        };
+        return generateLightBoxItem(arg.url, arg.groupName, arg.title);
+      }
     }
+  },
+  hooks: {
+    init() {
+      lightboxConfig = this.config.get('pluginsConfig.lightbox');
+      if (!Object.prototype.hasOwnProperty.call(lightboxConfig, 'sameUuid')) {
+        lightboxConfig.sameUuid = false;
+      }
+    },
+    page(page) {
+      const $ = cheerio.load(page.content);
+      pageUuid = uuid();
+      $('img').each((index, img) => {
+        const target = $(img);
+        target.replaceWith(generateLightBoxByElement(target));
+      });
+      page.content = $('body').html();
+      page.content += generateLightboxConfigScript();
+      return page;
+    },
+  },
 };
