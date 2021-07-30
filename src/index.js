@@ -9,7 +9,7 @@ const generateLightBoxByElement = (img) => {
   if (lightboxConfig.sameUuid !== true) {
     imgUuid = uuid();
   }
-  return generateLightBoxItem(img.attr('src'), imgUuid, img.attr('alt'), img.attr('style'))
+  return generateLightBoxItem(img.attr('src'), imgUuid, img.attr('alt'), img.attr('style'));
 };
 
 const generateLightBoxItem = (url, groupName, title, cssStyle) => `<a href="${url}" data-lightbox="${groupName}" data-title="${title}"><img src="${url}" alt="${title}" style="${cssStyle}"></a>`;

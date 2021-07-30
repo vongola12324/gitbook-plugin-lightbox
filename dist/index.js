@@ -14,11 +14,11 @@ var generateLightBoxByElement = function generateLightBoxByElement(img) {
     imgUuid = uuid();
   }
 
-  return generateLightBoxItem(img.attr('src'), imgUuid, img.attr('alt'));
+  return generateLightBoxItem(img.attr('src'), imgUuid, img.attr('alt'), img.attr('style'));
 };
 
-var generateLightBoxItem = function generateLightBoxItem(url, groupName, title) {
-  return "<a href=\"".concat(url, "\" data-lightbox=\"").concat(groupName, "\" data-title=\"").concat(title, "\"><img src=\"").concat(url, "\" alt=\"").concat(title, "\"></a>");
+var generateLightBoxItem = function generateLightBoxItem(url, groupName, title, cssStyle) {
+  return "<a href=\"".concat(url, "\" data-lightbox=\"").concat(groupName, "\" data-title=\"").concat(title, "\"><img src=\"").concat(url, "\" alt=\"").concat(title, "\" style=\"").concat(cssStyle, "\"></a>");
 };
 
 var getAssets = function getAssets() {
@@ -68,7 +68,7 @@ module.exports = {
     page: function page(_page) {
       var $ = cheerio.load(_page.content);
       pageUuid = uuid();
-      $('img').each(function (index, img) {
+      $('img').not('.no-zoom').each(function (index, img) {
         var target = $(img);
         target.replaceWith(generateLightBoxByElement(target));
       });
